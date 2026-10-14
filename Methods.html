@@ -51,25 +51,25 @@
 
 								<h3 style="color: #DA972B;">Pipeline</h3>
 								<p style="color: #ffffff;"><strong style="color: #ffffff;">1. Genomes</strong> <br>
-									For each <a href="https://cites.org/eng/app/appendices.php">CITES</a>-listed genus with at least one genome assembly available in <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/">NCBI</a>, the best assembly is selected as the reference genome, prioritising RefSeq reference status, assembly level and contig N50. Other usable assemblies from the same genus are used as comparison genomes. If the reference lacks a sex chromosome present in other assemblies (e.g. a Y chromosome in a female reference), the best available genome carrying that chromosome is used for marker discovery on that chromosome.<br>
+									For each <a href="https://cites.org/eng/app/appendices.php">CITES</a>-listed genus with at least one genome assembly available in <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/">NCBI</a>, the best assembly is selected as the reference genome. Other usable assemblies from the same genus are used as comparison genomes. If the reference lacks a sex chromosome present in other assemblies (e.g. a Y chromosome in a female reference), the best available genome carrying that chromosome is used for marker discovery on that chromosome.<br>
 									<br>
-									<strong style="color: #ffffff;">2. STR detection</strong> <br>
-									PERF; tetranucleotide repeats only (mono-/dinucleotide motifs removed), 7–30 repeat units, longest perfect block ≥ 5 units, compound repeats with gaps ≤ 10 bp merged. Loci with another tetranucleotide STR within 100 bp or another SSR within 20 bp are removed; 300 bp flanks must be free of N..<br>
+									<strong style="color: #ffffff;">2. STR Detection</strong> <br>
+									<a href="https://doi.org/10.1093/bioinformatics/btx721">PERF</a> is used to identify tetranucleotide STRs. Candidate loci must contain 7–30 repeat units and a longest perfect repeat block of at least 5 units. Compound repeats separated by gaps of ≤ 10 bp are merged. Loci are excluded if another tetranucleotide STR occurs within 100 bp or another simple sequence repeat within 20 bp.<br>
 									<br>
-									<strong style="color: #ffffff;">3. Primer design</strong> <br>
-									Primer3: amplicon 100–450 bp, primer 18–27 bp (opt. 21), Tm 57–63 °C (opt. 60, ΔTm ≤ 3), GC 30–65 %, no 3′ end in repeat-masked sequence or on another SSR. Three primer pairs per locus are evaluated.<br>
+									<strong style="color: #ffffff;">3. Primer Design</strong> <br>
+									<a href="https://doi.org/10.1093/nar/gks596">Primer3</a> designs primer pairs with an expected amplicon length of 100–450 bp. Primers must be 18–27 bp long, with a melting temperature of 57–63 °C (maximum difference between primer Tm values: 3 °C) and a GC content of 30–65 %. The 3′ end of a primer must not overlap a repeat-masked region or another repeat.<br>
 									<br>
-									<strong style="color: #ffffff;">4. Single copy</strong> <br>
-									Amplicon windows mapping a second time to the reference (≥ 50 % length, ≥ 85 % identity) are removed. Primer pairs whose amplicon contains a second tetranucleotide STR (≥ 7 units) are replaced by an alternative pair or discarded.<br>
+									<strong style="color: #ffffff;">4. Single-Copy Screening</strong> <br>
+									Amplicon windows that produce a second alignment to the reference genome covering ≥ 50 % of the window at ≥ 85 % sequence identity are excluded. If an amplicon contains another tetranucleotide STR, an alternative primer pair is selected where available; otherwise, the locus is discarded.<br>
 									<br>
-									<strong style="color: #ffffff;">5. Comparison genomes</strong> <br>
-									Amplicon windows are aligned (BLAST, ≥ 85 % identity, affine gaps) to every comparison genome. The allele is the length of the repeat region in that genome (forensic nomenclature, e.g. 9.3 = 9 units + 3 bp). A primer site is conserved with ≤ 2 mismatches per primer, ≤ 1 in the last five 3′ bases and the two terminal 3′ bases matching..<br>
+									<strong style="color: #ffffff;">5. Comparison Across Genomes</strong> <br>
+									Amplicon windows are aligned to each comparison genome using <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>, with a minimum sequence identity of 85 % and affine gap penalties. The allele is defined by the length of the repeat region in each genome, following forensic repeat nomenclature. Primer-binding sites are considered conserved if each primer has ≤ 2 mismatches, no more than 1 mismatch occurs within the last five 3′ bases, and the terminal two 3′ bases match exactly.<br>
 									<br>
-									<strong style="color: #ffffff;">6. Criteria</strong> <br>
-									See below. Markers are listed regardless of linkage and amplicon overlap – the database is a pool to build your own panel from.<br>
+									<strong style="color: #ffffff;">6. Marker Selection Criteria</strong> <br>
+									Candidate markers are evaluated against the selection criteria described below. Markers are retained in the database regardless of linkage or amplicon overlap. STR-WISE therefore provides a pool of candidate markers from which users can select suitable combinations for their own panels.<br>
 									<br>
-									<strong style="color: #ffffff;">7. In-silico PCR and multiplexing </strong> <br>
-									Primers are checked for additional products in the reference and the human genome (≤ 3 mismatches, products ≤ 1,500 bp; reported, not filtered). Primer Pooler assigns markers to ≥ 2 multiplex pools, avoiding primer dimers (ΔG ≤ −7 kcal/mol) and never placing overlapping amplicons in the same pool.<br>
+									<strong style="color: #ffffff;">7. In-Silico PCR and Multiplexing </strong> <br>
+									Primer pairs are screened for potential off-target amplification products in the reference genome and the human genome. <a href="https://github.com/ssb22/PrimerPooler">PrimerPooler</a> is then used to assign markers to at least two multiplex pools while avoiding primer-dimer interactions and preventing overlapping amplicons from being assigned to the same pool.<br>
 									<br>
 									
 								<p style="text-align: center;">
