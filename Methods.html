@@ -54,21 +54,18 @@
 									For each <a href="https://cites.org/eng/app/appendices.php">CITES</a>-listed genus with at least one genome assembly available in <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/">NCBI</a>, the best assembly is selected as the reference genome. Other usable assemblies from the same genus are used as comparison genomes. If the reference lacks a sex chromosome present in other assemblies (e.g. a Y chromosome in a female reference), the best available genome carrying that chromosome is used for marker discovery on that chromosome.<br>
 									<br>
 									<strong style="color: #ffffff;">2. STR Detection</strong> <br>
-									<a href="https://doi.org/10.1093/bioinformatics/btx721">PERF</a> is used to identify tetranucleotide STRs. Candidate loci must contain 7–30 repeat units and a longest perfect repeat block of at least 5 units. Loci are excluded if another STR occurs within the same amplicon.<br>
+									<a href="https://doi.org/10.1093/bioinformatics/btx721">PERF</a> is used to identify tetranucleotide STRs with 7–30 repeat units. Loci are excluded if another STR occurs within the same amplicon.<br>
 									<br>
 									<strong style="color: #ffffff;">3. Primer Design</strong> <br>
-									<a href="https://doi.org/10.1093/nar/gks596">Primer3</a> designs primer pairs with an expected amplicon length of 100–450 bp. Primers must be 18–27 bp long, with a melting temperature of 57–63 °C (maximum difference between primer Tm values: 3 °C) and a GC content of 30–65 %. The 3′ end of a primer must not overlap a repeat-masked region or another repeat.<br>
+									<a href="https://doi.org/10.1093/nar/gks596">Primer3</a> designs primer pairs with an expected amplicon length of 100–500 bp.<br>
 									<br>
-									<strong style="color: #ffffff;">4. Single-Copy Screening</strong> <br>
-									Amplicon windows that produce a second alignment to the reference genome covering ≥ 50 % of the window at ≥ 85 % sequence identity are excluded. If an amplicon contains another tetranucleotide STR, an alternative primer pair is selected where available; otherwise, the locus is discarded.<br>
+									<strong style="color: #ffffff;">4. Comparison Across Genomes</strong> <br>
+									Amplicons are <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>-searched against other genomes within the genus to identify additional alleles and assess STR variability.<br>
 									<br>
-									<strong style="color: #ffffff;">5. Comparison Across Genomes</strong> <br>
-									Amplicon windows are aligned to each comparison genome using <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>, with a minimum sequence identity of 85 % and affine gap penalties. The allele is defined by the length of the repeat region in each genome, following forensic repeat nomenclature. Primer-binding sites are considered conserved if each primer has ≤ 2 mismatches, no more than 1 mismatch occurs within the last five 3′ bases, and the terminal two 3′ bases match exactly.<br>
-									<br>
-									<strong style="color: #ffffff;">6. Marker Selection Criteria</strong> <br>
+									<strong style="color: #ffffff;">5. Marker Selection Criteria</strong> <br>
 									Candidate markers are evaluated against the selection criteria described below. Markers are retained in the database regardless of linkage or amplicon overlap. STR-WISE therefore provides a pool of candidate markers from which users can select suitable combinations for their own panels.<br>
 									<br>
-									<strong style="color: #ffffff;">7. In-Silico PCR and Multiplexing </strong> <br>
+									<strong style="color: #ffffff;">6. In-Silico PCR and Multiplexing </strong> <br>
 									Primer pairs are screened for potential off-target amplification products in the reference genome and the human genome. <a href="https://github.com/ssb22/PrimerPooler">PrimerPooler</a> is then used to assign markers to at least two multiplex pools while avoiding primer-dimer interactions and preventing overlapping amplicons from being assigned to the same pool.<br>
 									<br>
 									
