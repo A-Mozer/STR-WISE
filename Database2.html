@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <title>STR-WISE | Database</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STR-WISE wildlife forensic STR marker database">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="style.css">
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css"></noscript>
+</head>
+<body class="database-page">
+  <div id="page-wrapper">
+    <header id="header" class="alt">
+      <h1><a href="index.html">STR-WISE</a></h1>
+      <nav id="nav" aria-label="Main navigation">
+        <ul><li class="special">
+          <a href="#menu" class="menuToggle"><span>Menu</span></a>
+          <div id="menu"><ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Usage.html">Usage</a></li>
+            <li><a href="Database.html" aria-current="page">Database</a></li>
+            <li><a href="Methods.html">Methods</a></li>
+            <li><a href="Team.html">Team</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+          </ul></div>
+        </li></ul>
+      </nav>
+    </header>
+
+    <section id="db-banner">
+      <div class="db-banner-inner">
+        <p class="eyebrow">STR-WISE · WILDLIFE FORENSICS</p>
+        <h2>STR Marker Database</h2>
+        <p>Search, filter and explore candidate short tandem repeat markers across genera.</p>
+      </div>
+    </section>
+    <nav class="db-tabs tabs" aria-label="Database views">
+      <button type="button" data-nav="search" class="active">Search</button>
+      <button type="button" data-nav="browse">Browse genera</button>
+    </nav>
+
+    <main id="database-main">
+      <div class="wrap">
+        <section id="view-search">
+          <div class="hero">
+            <h1>Search the database</h1>
+            <p class="lede">Find genera by genus, family, order or species. Select a genus to explore its STR markers.</p>
+            <div class="search-box" aria-expanded="false">
+              <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
+              <input id="genus-input" type="text" autocomplete="off" placeholder="Search genus, family, order or species…" aria-label="Search genus">
+              <ul id="suggest" class="suggest" role="listbox" hidden></ul>
+            </div>
+            <p class="hint" id="db-stats">Loading database…</p>
+          </div>
+
+          <section id="genus-view" hidden>
+            <div id="genus-card" class="genus-card"></div>
+            <div class="layout">
+              <aside id="filters" class="filters">
+                <div class="filters-head">
+                  <h2>Filters</h2>
+                  <button type="button" class="link" id="reset-filters">Reset all</button>
+                </div>
+                <div id="filter-body"></div>
+              </aside>
+              <section class="results">
+                <div class="results-bar">
+                  <button type="button" class="btn ghost only-mobile" id="toggle-filters" aria-expanded="false">Show filters</button>
+                  <p class="count" id="count">Select a genus to begin.</p>
+                  <div class="bar-actions">
+                    <details class="menu">
+                      <summary class="btn ghost">Columns</summary>
+                      <div class="menu-pop" id="col-menu"></div>
+                    </details>
+                    <details class="menu">
+                      <summary class="btn">Export</summary>
+                      <div class="menu-pop">
+                        <button type="button" id="dl-csv">Download CSV</button>
+                        <button type="button" id="dl-tsv">Download TSV</button>
+                        <button type="button" id="dl-fasta">Download primer FASTA</button>
+                      </div>
+                    </details>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table id="marker-table">
+                    <thead></thead>
+                    <tbody><tr><td class="empty">Choose a genus to load markers.</td></tr></tbody>
+                  </table>
+                </div>
+                <div id="pager" class="pager"></div>
+              </section>
+            </div>
+          </section>
+        </section>
+
+        <section id="view-browse" hidden>
+          <h1 class="page-title">Browse genera</h1>
+          <p class="lede">Browse all genera included in the current STR-WISE database release.</p>
+          <div class="browse-bar">
+            <input id="browse-q" type="search" placeholder="Search genus, species, family or order…" aria-label="Search genera">
+            <select id="browse-class" aria-label="Filter by class"><option value="">All classes</option></select>
+            <select id="browse-cites" aria-label="Filter by CITES appendix">
+              <option value="">All CITES appendices</option><option value="I">Appendix I</option><option value="II">Appendix II</option><option value="III">Appendix III</option>
+            </select>
+          </div>
+          <p class="hint" id="browse-count"></p>
+          <div class="table-wrap">
+            <table id="browse-table"><thead></thead><tbody></tbody></table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="drawer" class="drawer" hidden>
+      <div class="drawer-backdrop" data-close></div>
+      <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <button type="button" class="drawer-close" data-close aria-label="Close details">×</button>
+        <div id="drawer-body"></div>
+      </section>
+    </div>
+
+    <footer id="footer">
+      <ul class="copyright">
+        <li>© STR-WISE</li><li>Wildlife Investigations and Species Enforcement</li>
+        <li id="footer-meta">Database information loading…</li>
+      </ul>
+    </footer>
+  </div>
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
